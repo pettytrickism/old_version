@@ -522,8 +522,8 @@ class KiwoomPy():
         #    (홑따움표는 필요없음 예: https://api.telegram.org/bot1005626992:AAIIwBBByAJd9JLoZWFGKvsY9a4gO4IIIIg/getUpdates
         # 7. 브라우저에 표시되는 첫 줄 끝에 쳇ID 확인    * { "ok": true, "result": [{ "update_id": 000000000,
 
-        apiToken = "HTTP API 토큰" # "1005626992:AAFKwJZYyAJd9JLoZWMLKvsY9a4gO4IPB8g"
-        chatId = "쳇ID" # "451041516"
+        apiToken = "HTTP API 토큰" 
+        chatId = "쳇ID"
         bot = telepot.Bot(apiToken)
         bot.sendMessage(chatId, msg)
 
