@@ -111,7 +111,7 @@ class KiwoomPy():
             return code
 
         temp_df = pd.read_excel(filePath)
-        info_df = temp_df[['종목코드', '종목명', '종가', '시가총액', '상장주식수', '거래량']].copy()
+        info_df = temp_df[['종목코드', '종목명', '종가', '시가총액', '상장주식수', '거래량', '시장구분']].copy()
         info_df['종목코드'] = info_df['종목코드'].apply(changeCode)
         info_df = info_df.sort_values(by=['시가총액'])
         info_df.reset_index(drop=True, inplace=True) # 정렬로 인덱스 변경에 따른 인덱스 재설정
@@ -119,6 +119,9 @@ class KiwoomPy():
         # 조건를 충족하지 않는 데이터를 필터링하여 새로운 변수에 저장합니다.
         noPrice = info_df['거래량'] == 0
         info_df = info_df[~noPrice]  # ~ : 틸데라고 하며 반대조건 증 지금은 거래량에 데이터가 0인 경우 제외됨
+        
+        konex = info_df['시장구분'] == "KONEX"
+        info_df = info_df[~konex]  # ~ : 틸데라고 하며 반대조건. KONEX제외(개인은 거래가 제한, 3천만원 예수금 필요함)
 
         cnt = len(info_df) * 0.2  # 시가총액 하위 20%만 선택
         info_df = info_df.loc[:cnt]
