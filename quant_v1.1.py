@@ -1,4 +1,5 @@
 # 버전업(1.1) - 텔레그램 메시지 전송 기능 추가, 주식 정보 재활용(현재가 업데이트로 정보획득 시간 절약)
+# 오류 수정 396-397행 : StockHaving, QuantList 초기화 추가
 # 파일이름을 quant.py로 수정하여 사용
 import os
 import random
@@ -393,6 +394,8 @@ class KiwoomPy():
         connect = sqlite3.connect(self.DBPath, isolation_level=None)
         sqlite3.Connection
         cursor = connect.cursor()
+        cursor.execute("DELETE FROM StockHaving;")
+        cursor.execute("DELETE FROM QuantList;")
 
         if StockCount == 0:
             print("종목 보유 없음.")
