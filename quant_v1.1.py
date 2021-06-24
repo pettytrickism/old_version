@@ -358,7 +358,7 @@ class KiwoomPy():
         self.nowDateTime = selectDateTime + "_up_" + datetime.datetime.now().strftime('%m%d%H%M')
 
         for row in rows:
-            result_df = self.kiwoom.block_request("opt10001", 종목코드=row[1], output="예수금상세현황", next=0)
+            result_df = self.kiwoom.block_request("opt10001", 종목코드=row[1], output="주식기본정보", next=0)
             price = abs(int(result_df['현재가']))
             sql = "INSERT INTO StockList (Code, Name, MarketCap, Price, EPS, BPS, CFPF, SPS, Date) VALUES ('%s', '%s', %s, %s, %s, %s, %s, %s, '%s')" % (row[1], row[2], row[3], price, row[4], row[5], row[6], row[7], self.nowDateTime,)
             cursor.execute(sql)
