@@ -216,7 +216,7 @@ def updateNowPrice(selectDateTime):
             result_df = kiwoom.block_request("opt10001", 종목코드=row[1], output="주식기본정보", next=0)
             time.sleep(3.6)
         price = abs(int(result_df['현재가']))
-        # sql = "INSERT INTO StockList (Code, Name, MarketCap, Price, EPS, BPS, CFPF, SPS, Date) VALUES ('%s', '%s', %s, %s, %s, %s, %s, %s, '%s')" % (row[1], row[2], row[3], price, row[4], row[5], row[6], row[7], nowDateTime,)
+        # sql = "INSERT INTO StockList (Code, Name, MarketCap, Price, EPS, BPS, CFPS, SPS, Date) VALUES ('%s', '%s', %s, %s, %s, %s, %s, %s, '%s')" % (row[1], row[2], row[3], price, row[4], row[5], row[6], row[7], nowDateTime,)
         sql = "UPDATE StockList SET Price = %s WHERE ID = %s AND Date = %s;" % (price, row[0], selectDateTime)
         cursor.execute(sql)
         print("%s의 현재가를 업데이트 했습니다." % row[2])
@@ -254,7 +254,7 @@ def getStockInfo(selectDateTime):
     print("완료")
 
     print("PCR 순위 추가 : ", end='')
-    cursor.execute("SELECT Code, Price / CFPF FROM StockList WHERE Date = '%s';" % (selectDateTime))
+    cursor.execute("SELECT Code, Price / CFPS FROM StockList WHERE Date = '%s';" % (selectDateTime))
     rows = cursor.fetchall()
     df_PCR = pd.DataFrame(rows)
     df_PCR.columns = ['Code', 'PCR']
