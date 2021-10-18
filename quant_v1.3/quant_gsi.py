@@ -136,7 +136,7 @@ def getCodeInfo():
 
         if len(temp_df) >= 23 :  # 일부 주식은 CFPS, SPS가 없으므로 조회하지 않음  예) 900290 GRT
             temp_df = temp_df.loc[['EPS계산에 참여한 계정 펼치기', 'BPS계산에 참여한 계정 펼치기', 'CFPS계산에 참여한 계정 펼치기', 'SPS계산에 참여한 계정 펼치기']]
-            temp_df.index = ['EPS', 'BPS', 'CFPF', 'SPS']
+            temp_df.index = ['EPS', 'BPS', 'CFPS', 'SPS']
             temp_df.drop(temp_df.columns[0:4], axis=1, inplace=True)
 
             if str(temp_df.loc['EPS'][0]) != 'nan': eps = int(temp_df.loc['EPS'][0])
@@ -145,8 +145,8 @@ def getCodeInfo():
             if str(temp_df.loc['BPS'][0]) != 'nan': bps = int(temp_df.loc['BPS'][0])
             else: bps = 0
 
-            if str(temp_df.loc['CFPF'][0]) != 'nan': cfpf = int(temp_df.loc['CFPF'][0])
-            else: cfpf = 0
+            if str(temp_df.loc['CFPS'][0]) != 'nan': cfps = int(temp_df.loc['CFPS'][0])
+            else: cfps = 0
 
             if str(temp_df.loc['SPS'][0]) != 'nan': sps = int(temp_df.loc['SPS'][0])
             else: sps = 0
@@ -154,14 +154,14 @@ def getCodeInfo():
         else:
             eps = 0
             bps = 0
-            cfpf = 0
+            cfps = 0
             sps = 0
 
-        sql_update_value = "UPDATE StockList SET EPS = %s, BPS = %s, CFPF = %s, SPS = %s, Date = '%s' WHERE ID = %s;"
-        sql_update_value = sql_update_value % (eps, bps, cfpf, sps, nowDateTime, row[0])
+        sql_update_value = "UPDATE StockList SET EPS = %s, BPS = %s, CFPS = %s, SPS = %s, Date = '%s' WHERE ID = %s;"
+        sql_update_value = sql_update_value % (eps, bps, cfps, sps, nowDateTime, row[0])
         cursor.execute(sql_update_value)
 
-        if eps == 0 or bps == 0 or cfpf == 0 or sps == 0:
+        if eps == 0 or bps == 0 or cfps == 0 or sps == 0:
             print("일부 기업가치 지표 미추출로 0 처리")
         else:
             print("완료")
