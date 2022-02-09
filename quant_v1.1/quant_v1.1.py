@@ -532,7 +532,7 @@ class KiwoomPy():
         # 6. 크롬 주소창에 "https://api.telegram.org/bot'HTTP API 토큰'/getUpdates" 입력하여 접속
         #    (홑따움표는 필요없음 예: https://api.telegram.org/bot1005626992:AAIIwBBByAJd9JLoZWFGKvsY9a4gO4IIIIg/getUpdates )
         # 7. 텔레그램에 아무 메세지 발송
-        # 7. 브라우저 새로고침 하여 표시되는 두번째 줄의 ID 확인. 이 ID가 chatId    * "message": { "message_id": 2, "from": { "id": 000000000, "is_bot": false,----
+        # 8. 브라우저 새로고침 하여 표시되는 두번째 줄의 ID 확인. 이 ID가 chatId    * "message": { "message_id": 2, "from": { "id": 000000000, "is_bot": false,----
 
         apiToken = "HTTP API 토큰"
         chatId = "쳇ID"
